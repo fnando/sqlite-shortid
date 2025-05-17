@@ -1,0 +1,25 @@
+{
+  "owner": "fnando",
+  "name": "sqlite-shortid",
+  "version": "v0.0.0",
+  "homepage": "https://github.com/fnando/sqlite-shortid",
+  "repository": "https://github.com/fnando/sqlite-shortid",
+  "authors": [
+    "Nando Vieira"
+  ],
+  "license": "MIT",
+  "description": "A SQLite extension to generate short ids like slack.com",
+  "keywords": [
+    "primary key",
+    "shortid",
+    "slack"
+  ],
+  "assets": {
+    "files": {
+      "darwin-amd64": "shortid-x86_64-apple-darwin.zip",
+      "darwin-arm64": "shortid-aarch64-apple-darwin.zip",
+      "linux-amd64": "shortid-x86_64-unknown-linux-gnu.zip",
+      "windows-amd64": "shortid-x86_64-pc-windows-gnu.zip"
+    }
+  }
+}

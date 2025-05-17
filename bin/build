@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile do
+  gem "toml-rb"
+end
+
+require "digest/sha2"
+require "toml-rb"
+require "fileutils"
+require "json"
+
+def version
+  TomlRB.load_file(File.join(Dir.pwd, "Cargo.toml")).dig("package", "version")
+end
+
+def build(target)
+  system("cargo build --target #{target} --release --quiet") || exit(1)
+  release_dir = "target/#{target}/release"
+
+  original_path = Dir["#{release_dir}/*.{dll,so,dylib}"].first
+  ext = File.extname(original_path)
+  output_dir = "build/v#{version}"
+  lib_path = "#{release_dir}/shortid#{ext}"
+  FileUtils.mv(original_path, lib_path) if original_path != lib_path
+  output_path = "#{output_dir}/shortid-#{target}.zip"
+
+  FileUtils.mkdir_p(output_dir)
+
+  system "zip #{output_path} #{lib_path} -q"
+end
+
+def create_sqlitepkg_manifest
+  json = JSON.load_file("sqlpkg.json")
+  json["version"] = "v#{version}"
+
+  File.open("sqlpkg.json", "w") do |io|
+    io << JSON.pretty_generate(json)
+  end
+end
+
+system("cargo clippy --quiet -- -Dwarnings -Dclippy::all -Dclippy::pedantic") || exit(1)
+
+FileUtils.rm_rf("build")
+
+build "x86_64-pc-windows-gnu"
+build "aarch64-apple-darwin"
+build "x86_64-apple-darwin"
+build "x86_64-unknown-linux-gnu"
+create_sqlitepkg_manifest

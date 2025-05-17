@@ -1,0 +1,23 @@
+[package]
+name = "sqlite-shortid"
+version = "0.0.0"
+edition = "2021"
+authors = ["Nando Vieira <me@fnando.com>"]
+description = "A SQLite extension to generate short ids like slack.com"
+homepage = "https://github.com/fnando/sqlite-shortid"
+repository = "https://github.com/fnando/sqlite-shortid"
+keywords = ["sqlite", "sqlite-extension"]
+license = "MIT"
+
+[dependencies]
+rand = "0.9.1"
+sqlite-loadable = "0.0.6-alpha.6"
+
+[lib]
+crate-type=["lib", "staticlib", "cdylib"]
+
+[profile.release]
+panic = "abort"
+
+[profile.dev]
+panic = "abort"

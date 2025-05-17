@@ -53,7 +53,7 @@ pub fn shortid(context: *mut sqlite3_context, values: &[*mut sqlite3_value]) -> 
 /// # Errors
 ///
 /// This function will return an error if registering functions with `SQLite` fails.
-pub fn sqlite3_sqliteshortid_init(db: *mut sqlite3) -> Result<()> {
+pub fn sqlite3_shortid_init(db: *mut sqlite3) -> Result<()> {
     define_scalar_function(
         db,
         "shortid_version",

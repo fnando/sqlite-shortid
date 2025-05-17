@@ -29,7 +29,7 @@ def build(target)
 
   FileUtils.mkdir_p(output_dir)
 
-  system "zip #{output_path} #{lib_path} -q"
+  system "zip -jq #{output_path} #{lib_path}"
 end
 
 def create_sqlitepkg_manifest

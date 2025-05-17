@@ -475,7 +475,7 @@ dependencies = [
 
 [[package]]
 name = "sqlite-shortid"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "rand",
  "sqlite-loadable",

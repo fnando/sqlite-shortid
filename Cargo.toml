@@ -1,6 +1,6 @@
 [package]
 name = "sqlite-shortid"
-version = "0.0.0"
+version = "0.0.1"
 edition = "2021"
 authors = ["Nando Vieira <me@fnando.com>"]
 description = "A SQLite extension to generate short ids like slack.com"
